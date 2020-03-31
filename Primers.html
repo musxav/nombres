@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Find prime numbers</title>
+    <meta name="author" content="Xavier Massotti Godino (musxav)" />
+    <meta name="copyright" content="Xavier Massotti Godino" />
+    <meta name="description" content="Algorithm to find prime numbers without direct multiplication or division" />
+    <meta name="keywords" content="math,prime numbers" />
+
+    <script language="javascript">
+
+        function trobarPrimers() {
+
+            var tdiv = document.getElementById("txarea");
+            tdiv.innerHTML = "";
+
+            var tsp = document.createElement("span");
+            var tt = document.createTextNode("Prime numbers: 2");
+
+            tsp.appendChild(tt);
+            tdiv.appendChild(tsp);
+
+            var aprimers = [2]; // array prime numbers
+            var aresidus = [0]; // array remainder 
+
+            // limit to find
+            var topall = Number.parseInt(document.getElementById("cantitat").value);
+
+            // found control
+            var primer = true;
+
+            // general loop, n is a number to be verified
+            for (n = 3; aprimers.length <= topall; n++) {
+
+                primer = true;
+
+                // prime number array loop
+                for (i = 0; i < aprimers.length; i++) {
+
+                    // remainder increment
+                    aresidus[i] = aresidus[i] + 1;
+
+                    // control to know if the prime number is divisor
+                    if (aresidus[i] == aprimers[i]) {
+                        aresidus[i] = 0;
+                        primer = false;
+                    }
+                }
+
+                if (primer) {
+                    tsp = document.createElement('span');
+                    tt = document.createTextNode(', ' + n);
+                    tsp.appendChild(tt);
+                    tdiv.appendChild(tsp);
+
+                    // add prime number
+                    aprimers.push(n);
+                    aresidus.push(0);
+                }
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <h2>Find prime numbers</h2>
+    
+    <p>This remainder-based algorithm finds prime numbers without direct multiplication or division.</p>
+    
+    <br />
+    How many prime numbers? <input type="text" id="cantitat" value="50" />
+
+    <button onclick="trobarPrimers()">go</button>
+    <br />
+    <br />
+
+    <div id="txarea">
+
+    </div>
+
+
+</body>
+</html>
+
